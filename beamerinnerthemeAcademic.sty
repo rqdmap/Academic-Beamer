@@ -1,0 +1,110 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerinnerthemeAcademic}[2024/09/02 v0.0.1 The Academic Beamer
+Inner Theme]
+
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+
+\newlength{\beamer@plainpagewidth}
+
+\ProcessOptionsBeamer
+
+\mode<presentation> {
+
+ % Set stripe border in title page
+\newcommand{\xdbg}{
+    \setbeamertemplate{background}{
+        \tikzexternaldisable
+        \begin{tikzpicture}[overlay]
+            \fill[structure.fg] (0,-\paperheight+3ex) rectangle (2ex,-\paperheight+4ex);
+            \fill[structure.fg] (0ex,-\paperheight+5ex) rectangle (2ex,-\paperheight+6ex);
+            \fill[structure.fg] (0ex,-\paperheight+7ex) rectangle (2ex,-\paperheight+8ex);
+            \fill[structure.fg] (0ex,-\paperheight+9ex) rectangle (2ex,-\paperheight+10ex);
+            \fill[structure.fg] (0ex,-\paperheight+11ex) rectangle (2ex,-\paperheight+12ex);
+            \end{tikzpicture}
+        \tikzexternalenable
+    }
+}
+
+\setbeamertemplate{title page}{
+    {}\vspace*{\baselineskip}
+
+    \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}
+    \hskip-\beamer@leftsidebar
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+        \includegraphics[width=4cm]{Assets/logo}
+        \vfill
+        \centering
+
+        {\usebeamerfont{title}\usebeamercolor[fg]{title}\inserttitle}
+        \vspace*{0.5\baselineskip}
+
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle}
+        \vspace*{\baselineskip}
+
+        \begin{beamercolorbox}[wd=\beamer@plainpagewidth,center,sep=\baselineskip]{frametitle}
+            {\usebeamerfont{author}\insertauthor}
+            \vspace*{\baselineskip}
+
+            {\usebeamerfont{institute}\insertinstitute}\vspace*{\baselineskip}
+
+            {\usebeamerfont{date}\insertdate}\vspace*{\baselineskip}
+        \end{beamercolorbox}
+
+        \vspace*{\baselineskip}
+        \vfill
+        {}\vspace*{\baselineskip}
+    \end{minipage}
+}
+
+\defbeamertemplate{final page}{text}[1]{
+    {}\vspace*{\baselineskip}
+
+    \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}
+    \hskip-\beamer@leftsidebar
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+        \includegraphics[width=4cm]{Assets/logo}
+        \vfill
+        \centering
+        \vspace*{-2\baselineskip}
+        \begin{beamercolorbox}[wd=\textwidth,center,sep=2\baselineskip]{frametitle}
+            #1
+        \end{beamercolorbox}
+        \vfill
+        {}\vspace*{\baselineskip}
+    \end{minipage}
+}
+
+\newcommand{\finalpage}[1]{
+    \setbeamertemplate{final page}[text]{#1}
+    \usebeamertemplate{final page}
+}
+
+\AtBeginPart{{\xdbg\frame[plain,noframenumbering]{
+    {}\vspace*{\baselineskip}%
+    \hskip-1.6\beamer@height%
+    \includegraphics[width=4cm]{Assets/logo}
+    \partpage
+ }}}
+
+\defbeamertemplate*{part page}{sidebar theme}{
+    \setlength{\beamer@plainpagewidth}{\textwidth+\beamer@leftsidebar}%
+    \hskip-\beamer@leftsidebar%
+    \begin{minipage}[c][\textheight][c]{\beamer@plainpagewidth}
+        \centering
+        \vspace*{-5\baselineskip}
+        {\usebeamerfont{title}\usebeamercolor[fg]{author}{第 \Roman{part} 部分}}\vspace*{\baselineskip}
+
+        {\usebeamerfont{title}\usebeamercolor[fg]{title}{\insertpart}}
+    \end{minipage}
+}
+
+\setbeamertemplate{bibliography item}[text]
+\setbeamertemplate{caption}[numbered]
+\setbeamercovered{transparent}
+
+\renewcommand{\figurename}{图}
+\renewcommand{\tablename}{表}
+\renewcommand\refname{参考文献}
+
+}

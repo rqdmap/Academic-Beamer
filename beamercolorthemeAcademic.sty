@@ -1,0 +1,17 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamercolorthemeAcademic}[2024/09/02 v0.0.1 The Academic Beamer Color Theme]
+
+\ProcessOptionsBeamer
+
+\mode<presentation> {
+    \definecolor{beamer@barcolor}{RGB}{38,81,107}% 冷色系辅助色
+    \definecolor{beamer@headercolor}{RGB}{0,65,130}% xdblue
+    \definecolor{beamer@normaltextcolor}{RGB}{0,0,0}% balck
+
+    \setbeamercolor{structure}{fg=beamer@headercolor}
+    \setbeamercolor{normal text}{fg=beamer@normaltextcolor,bg=white}
+    \setbeamercolor{frametitle}{fg=white,bg=beamer@headercolor}
+    \setbeamercolor{XDUsidebar}{fg=gray!50,bg=white}%
+}
+
+\mode<all>

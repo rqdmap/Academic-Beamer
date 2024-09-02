@@ -1,0 +1,87 @@
+\lstset{
+	language	= c++,
+	rulesepcolor= \color{gray},
+	breaklines=true,
+	commentstyle = \color{gray},
+	keywordstyle={
+		\color[RGB]{175,0,175}
+		\bfseries
+	},
+	basicstyle={
+		\footnotesize
+		\ttfamily
+	},
+	tabsize	 = 8,
+	showtabs	= false,
+	frame	   = single,
+	columns	 = fullflexible,
+	showstringspaces = false,
+}
+
+% Custom lstlisting style
+\lstdefinestyle{style}{
+	rulesepcolor= \color{gray},
+	breaklines=true,
+	commentstyle = \color{gray},
+	keywordstyle={
+		\color[RGB]{175,0,175}
+		\bfseries
+	},
+	basicstyle={
+		\tiny
+		\ttfamily
+	},
+	frame	   = single,
+	showstringspaces = false,
+	extendedchars = true,
+	keepspaces = true,
+	columns	 = flexible,
+	tabsize	 = 8,
+}
+
+\usepackage{fontspec}
+% 设置中文字体
+\setCJKfamilyfont{song}{Source Han Serif SC} % 设置黑体家族
+\setCJKfamilyfont{hei}{Source Han Sans SC Medium} % 设置黑体家族
+% \setCJKfamilyfont{hei}{Source Han Serif SC} % 设置黑体家族
+\setCJKfamilyfont{kaiti}{Kaiti SC} % 设置楷体家族
+\setCJKmainfont{Source Han Serif SC}
+\setCJKmonofont{SimSun} % 设置等宽字体为宋体
+\setsansfont{Times New Roman}
+\setmainfont{Times New Roman}
+
+\newcommand{\song}[1]{{\CJKfamily{song}#1}} % 定义一个命令，用于楷体引用
+\newcommand{\kai}[1]{{\CJKfamily{kaiti}#1}} % 定义一个命令，用于楷体引用
+\newcommand{\hei}[1]{{\CJKfamily{hei}#1}} % 定义一个命令，用于楷体引用
+\newenvironment{heienv}{\CJKfamily{song}}{}
+
+% 自定义一个新的frame命令，自动使用当前最深级别的标题
+\usepackage{etoolbox}
+\newcommand{\currentdeepesttitle}{}
+% 新命令来确定当前最深的标题层级
+\newcommand{\determineCurrentTitle}{%
+    \ifnumequal{\value{subsubsection}}{0}{%
+        \ifnumequal{\value{subsection}}{0}{%
+            \renewcommand{\currentdeepesttitle}{\insertsectionhead}%
+        }{%
+            \renewcommand{\currentdeepesttitle}{\insertsubsectionhead}%
+        }%
+    }{%
+        \renewcommand{\currentdeepesttitle}{\insertsubsubsectionhead}%
+    }%
+}
+
+% 在每个subsection和subsubsection开始时调用\determineCurrentTitle
+\AtBeginSection[]{%
+    \determineCurrentTitle%
+}
+\AtBeginSubsection[]{%
+    \determineCurrentTitle%
+}
+\AtBeginSubsubsection[]{%
+    \determineCurrentTitle%
+}
+
+\newcommand{\blue}[1]{\hei{\color{blue}#1}}
+\newcommand{\red}[1]{\hei{\color{red}#1}}
+

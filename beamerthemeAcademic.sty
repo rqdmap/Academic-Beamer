@@ -1,0 +1,19 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{beamerthemeAcademic}[2024/09/02 v0.0.1 The Academic Beamer Theme]
+
+% \def\XDUstyle{X\kern -.1667em\lower .5ex\hbox {D}\kern -.125emU\textit{style}{}}
+
+\RequirePackage{tikz}
+\usetikzlibrary{external}
+\RequirePackage{calc}
+
+\DeclareOptionBeamer{width}{\PassOptionsToPackage{width=#1}{beamerouterthemeAcademic}}
+\ProcessOptionsBeamer
+
+\mode<presentation> {
+  \useinnertheme{Academic}
+  \useoutertheme{Academic}
+  \usecolortheme{Academic}
+}
+
+\mode<all>
